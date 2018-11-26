@@ -384,7 +384,7 @@ class RetreivalBase(MangaCMS.ScrapePlugins.MangaScraperBase.MangaScraperBase):
 			if have_fqp == fqfilename:
 				self.log.error("Multiple instances of a releasefile created on same on-disk file!")
 				self.log.error("File: %s. Row id: %s", have_fqp, row.id)
-				raise RuntimeError
+				raise RuntimeError("Multiple instances of a releasefile created on same on-disk file!")
 			if os.path.exists(have_fqp):
 
 				with open(have_fqp, "rb") as fp1:
@@ -395,7 +395,7 @@ class RetreivalBase(MangaCMS.ScrapePlugins.MangaScraperBase.MangaScraperBase):
 				if fc1 != fc2:
 					self.log.error("Multiple instances of a releasefile with the same md5, but different contents?")
 					self.log.error("Files: %s, %s. Row id: %s", have_fqp, fqfilename, row.id)
-					raise RuntimeError
+					raise RuntimeError("Multiple instances of a releasefile with the same md5, but different contents?")
 
 				if fqfilename == have_fqp:
 					self.log.warning("Row for file-path already exists?.")

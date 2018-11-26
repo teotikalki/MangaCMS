@@ -105,7 +105,8 @@ class ContentLoader(MangaCMS.ScrapePlugins.RetreivalBase.RetreivalBase):
 				row.state = 'error'
 			return
 
-		hName = urllib.parse.unquote(hName)
+		hName          = urllib.parse.unquote(hName)
+		originFileName = urllib.parse.unquote(originFileName)
 		fName = "%s - %s" % (originFileName, hName)
 		fqFName = os.path.join(target_dir, fName)
 

@@ -131,7 +131,7 @@ class ContentLoader(MangaCMS.ScrapePlugins.RetreivalBase.RetreivalBase, LoginMix
 			soup = self.wg.getSoup(source_url, addlHeaders={'Referer': self.urlBase})
 
 		except Exception as e:
-			self.log.critical("No download at url %s! SourceUrl = %s", source_url)
+			self.log.critical("No download at url %s! Dbid = %s", source_url, link_row_id)
 			for line in traceback.format_exc().split("\n"):
 				self.log.critical(""+line)
 
