@@ -280,10 +280,10 @@ class DirDeduper(MangaCMSOld.DbBase.DbBase):
 				fpath = os.path.join(downloadpath, filename)
 			elif filename.startswith("/"):   # So... these are getting swapped. Somehow.
 				self.log.warning("File has path and filename swapped! Source: %s, %s", sourcesite, (downloadpath, filename))
-				raise RuntimeError("File has path and filename swapped! Source: %s, %s" % sourcesite, (downloadpath, filename))
+				raise RuntimeError("File has path and filename swapped! Source: %s, %s" % (sourcesite, (downloadpath, filename)))
 			else:
 				self.log.warning("No path starts with a slash! Source: %s, %s", sourcesite, (downloadpath, filename))
-				raise RuntimeError("No path starts with a slash! Source: %s, %s" % sourcesite, (downloadpath, filename))
+				raise RuntimeError("No path starts with a slash! Source: %s, %s" % (sourcesite, (downloadpath, filename)))
 
 			if tags and 'dup-checked' in taglist or 'missing-file' in taglist:
 				# self.log.info("File %s was dup-checked in the current session. Skipping.", fpath)
