@@ -135,21 +135,16 @@ class ContentLoader(MangaCMS.ScrapePlugins.RetreivalBase.RetreivalBase, LoginMix
 			for line in traceback.format_exc().split("\n"):
 				self.log.critical(""+line)
 
-			raise IOError("Invalid webpage")
+			raise ScrapeExceptions.UnwantedContentError("Item missing?")
 
 		if "This gallery has been removed, and is unavailable." in soup.get_text():
 			self.log.info("Gallery deleted. Removing.")
-			with self.row_sess_context(dbid=link_row_id) as row_tup:
-				row, sess = row_tup
-				sess.delete(row)
-			return False
+			raise ScrapeExceptions.UnwantedContentError("Item missing?")
 
 		item_tags = self.getTags(soup)
 		if not item_tags:
-			with self.row_sess_context(dbid=link_row_id) as row_tup:
-				row, sess = row_tup
-				sess.delete(row)
-			return False
+			self.log.info("No tags. Removing.")
+			raise ScrapeExceptions.UnwantedContentError("Item missing?")
 
 		# self.addTags(sourceUrl=sourceUrl, tags=tags)
 		# return True
